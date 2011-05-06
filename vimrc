@@ -29,3 +29,9 @@ set nohlsearch " no highlight
 set incsearch " incremental
 set ignorecase " case insensitve search
 
+"---handy macros
+" grab two lines from next section into current section
+let @q="}j2ddj{{jp"
+" expand a 'same' diff line into 'add' and 'subtract' lines
+let @w="yypk0r+jr-"
+
