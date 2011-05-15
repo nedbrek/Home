@@ -8,6 +8,14 @@ function git_prompt_info() {
 	echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
 }
 
+parse_git_dirty () {
+	if [[ -n $(git status -s 2> /dev/null) ]]; then
+echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
+	else
+echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+	fi
+}
+
 PROMPT='%{$fg[blue]%}%d %%%{$reset_color%} '
 RPROMPT='$(git_prompt_info)'
 
