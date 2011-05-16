@@ -1,3 +1,5 @@
+bindkey '^W' vi-backward-kill-word
+
 autoload -U colors && colors
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[red]%}("
