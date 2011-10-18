@@ -29,6 +29,10 @@ set nohlsearch " no highlight
 set incsearch " incremental
 set ignorecase " case insensitve search
 
+" buffer specialization
+" expand tabs in diffs
+:autocmd BufRead diffs.txt set expandtab
+
 "---handy macros
 " grab two lines from next section into current section
 let @q="}j2ddj{{jp"
