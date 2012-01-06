@@ -1,4 +1,6 @@
 set nocompatible " no vi stuff
+" allow different settings by filetype
+:filetype plugin on
 
 " run make inside vi
 :command -nargs=* Make make <args> | cwindow 3
@@ -28,14 +30,4 @@ set shiftwidth=3
 set nohlsearch " no highlight
 set incsearch " incremental
 set ignorecase " case insensitve search
-
-" buffer specialization
-" expand tabs in diffs
-:autocmd BufRead diffs.txt set expandtab
-
-"---handy macros
-" grab two lines from next section into current section
-let @q="}j2ddj{{jp"
-" expand a 'same' diff line into 'add' and 'subtract' lines
-let @w="yypk0r+jr-"
 
