@@ -2,6 +2,10 @@ set nocompatible " no vi stuff
 " allow different settings by filetype
 :filetype plugin on
 
+if has("tcl")
+   tclfile ~/.vim.tcl
+endif
+
 " run make inside vi
 :command -nargs=* Make make <args> | cwindow 3
 
