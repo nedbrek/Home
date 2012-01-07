@@ -7,7 +7,9 @@ proc collapseDiff {} {
 	set cur [$b get $l]
 	set firstChar [string index $cur 0]
 	if {$firstChar eq " "} {
-		return ;# not a diff line
+		# not a diff line
+		$b delete $l
+		return
 	}
 
 	# find the other line, start with next
