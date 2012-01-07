@@ -5,7 +5,7 @@ proc collapseDiff {} {
 
 	# check that current line is a diff
 	set tmp [$b get $l]
-	if {[string index 0] eq ' '} {
+	if {[string index $tmp 0] eq " "} {
 		return ;# not a diff line
 	}
 
