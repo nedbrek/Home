@@ -1,7 +1,7 @@
 proc collapseDiff {} {
-   set b $::vim::current(buffer)
-   set l $::vim::range(begin)
-   # Ned, check end==begin
+	set b $::vim::current(buffer)
+	set l $::vim::range(begin)
+	# Ned, check end==begin
 
 	# check that current line is a diff
 	set cur [$b get $l]
@@ -34,17 +34,17 @@ proc collapseDiff {} {
 		}
 	}
 
-   # retrieve current and other source line (strip lead char)
-   set curLine [string range $cur 1 end]
-   set nxtLine [string range $oth 1 end]
+	# retrieve current and other source line (strip lead char)
+	set curLine [string range $cur 1 end]
+	set nxtLine [string range $oth 1 end]
 
-   # compare
-   if {$curLine ne $nxtLine} {
-      return ;# different, leave intact
-   }
-   # else, merge
+	# compare
+	if {$curLine ne $nxtLine} {
+		return ;# different, leave intact
+	}
+	# else, merge
 
-   $b delete $l
-   $b set $l " $curLine"
+	$b delete $l
+	$b set $l " $curLine"
 }
 
