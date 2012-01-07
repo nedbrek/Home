@@ -1,5 +1,5 @@
 " expand tabs in diffs
-set expandtab
+setlocal expandtab
 
 " grab two lines from next section into current section
 let @q="}j2ddj{{jp"
