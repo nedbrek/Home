@@ -1,52 +1,82 @@
+proc isDoNothingLine {l} {
+	set firstChar [string index $l 0]
+
+	# whitespace is ok
+	if {[regexp {^[-+]$} $l]} {
+		return 1
+	}
+
+	# comments is ok
+	if {[regexp {^[-+][ \t]*//} $l]} {
+		return 1
+	}
+
+	return 0
+}
+
 proc collapseDiff {} {
 	set b $::vim::current(buffer)
 	set l $::vim::range(begin)
 	# Ned, check end==begin
+	set origL $l
 
 	# check that current line is a diff
 	set cur [$b get $l]
 	set firstChar [string index $cur 0]
 	if {$firstChar eq " " || $firstChar eq "@"} {
-		# not a diff line
+		# diff markers (not true diff)
 		$b delete $l
 		return
 	}
 
 	# find the other line, start with next
-	set oth [$b get [expr $l+1]]
+	set nextLine [$b get [expr $l+1]]
+	set prevLine [$b get [expr $l-1]]
+	set oth $nextLine
 
+	# is current + or -
 	if {$firstChar eq "+"} {
-		# should be -
-		if {[string index $oth 0] ne "-"} {
-			incr l -1
-			set oth [$b get $l]
-			if {[string index $oth 0] ne "-"} {
-				return
+		# look for -
+		if {[string index $nextLine 0] ne "-"} {
+			# not found, look at prev
+			if {[string index $prevLine 0] ne "-"} {
+				if {[isDoNothingLine $cur]} {
+					$b delete $l
+				}
+				return ;# not found
 			}
+			set oth $prevLine
+			incr l -1
 		}
 	} else {
 		if {$firstChar ne "-"} { return } ;# something horribly wrong
 
-		if {[string index $oth 0] ne "+"} {
-			incr l -1
-			set oth [$b get $l]
-			if {[string index $oth 0] ne "+"} {
+		if {[string index $nextLine 0] ne "+"} {
+			if {[string index $prevLine 0] ne "+"} {
+				if {[isDoNothingLine $cur]} {
+					$b delete $l
+				}
 				return
 			}
+			set oth $prevLine
+			incr l -1
 		}
 	}
 
 	# retrieve current and other source line (strip lead char)
-	set curLine [string range $cur 1 end]
-	set nxtLine [string range $oth 1 end]
+	set curTxt [string range $cur 1 end]
+	set nxtTxt [string range $oth 1 end]
 
 	# compare
-	if {$curLine ne $nxtLine} {
+	if {$curTxt ne $nxtTxt} {
+		if {[isDoNothingLine $cur]} {
+			$b delete $origL
+		}
 		return ;# different, leave intact
 	}
 	# else, merge
 
 	$b delete $l
-	$b set $l " $curLine"
+	$b set $l " $curTxt"
 }
 
