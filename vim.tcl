@@ -6,7 +6,7 @@ proc collapseDiff {} {
 	# check that current line is a diff
 	set cur [$b get $l]
 	set firstChar [string index $cur 0]
-	if {$firstChar eq " "} {
+	if {$firstChar eq " " || $firstChar eq "@"} {
 		# not a diff line
 		$b delete $l
 		return
