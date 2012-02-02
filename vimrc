@@ -34,4 +34,5 @@ set shiftwidth=3
 set nohlsearch " no highlight
 set incsearch " incremental
 set ignorecase " case insensitve search
+set smartcase " upper case search only matches uppercase
 
