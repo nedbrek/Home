@@ -65,10 +65,11 @@ proc collapseDiff {} {
 
 	# retrieve current and other source line (strip lead char)
 	set curTxt [string range $cur 1 end]
-	set nxtTxt [string range $oth 1 end]
+	set curT   [regsub {^[ \t]+} $curTxt ""]
+	set nxtTxt [regsub {^[ \t]+} [string range $oth 1 end] ""]
 
 	# compare
-	if {$curTxt ne $nxtTxt} {
+	if {$curT ne $nxtTxt} {
 		if {[isDoNothingLine $cur]} {
 			$b delete $origL
 		}
