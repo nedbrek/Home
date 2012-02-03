@@ -1,7 +1,16 @@
+# command line
 bindkey '^W' vi-backward-kill-word
+bindkey -e
+
+# auto-complete lower to upper
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 autoload -U colors && colors
 
+HISTSIZE=2000
+export EDITOR=vi
+
+# source control
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[red]%}("
 ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="*"
@@ -25,8 +34,12 @@ RPROMPT='$(git_prompt_info)'
 
 setopt prompt_subst
 
+# aliases
 builtin alias cp='cp -i'
 builtin alias mv='mv -i'
 builtin alias rm='rm -i'
 builtin alias vi='vim'
+builtin alias d='dirs -v'
+builtin alias ls='ls -F'
+builtin alias h='history'
 
