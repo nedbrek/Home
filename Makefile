@@ -4,5 +4,5 @@ all:
 	diff vimrc ~/.vimrc
 	diff vim.tcl ~/.vim.tcl
 	diff zshrc ~/.zshrc
-	@echo "Success"
+	@echo "\nSuccess"
 
