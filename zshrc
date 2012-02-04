@@ -35,11 +35,17 @@ RPROMPT='$(git_prompt_info)'
 setopt prompt_subst
 
 # aliases
+# better defaults
 builtin alias cp='cp -i'
 builtin alias mv='mv -i'
 builtin alias rm='rm -i'
 builtin alias vi='vim'
-builtin alias d='dirs -v'
 builtin alias ls='ls -F'
+
+# short forms
+builtin alias d='dirs -v'
 builtin alias h='history'
+
+# complex commands
+lsd() {ls -l | awk '/^d/{print $NF}'}
 
