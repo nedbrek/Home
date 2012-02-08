@@ -2,6 +2,20 @@ set nocompatible " no vi stuff
 " allow different settings by filetype
 :filetype plugin on
 
+" Perform a macro and save the last macro to g:LastMacro.
+let g:LastMacro = ''
+function! DoMacroSave()
+    let l:macro = getchar()
+    if l:macro =~ '^\d\+$'
+        let l:macro = nr2char(l:macro)
+    endif
+    if l:macro != '@'
+        let g:LastMacro = '@' .l:macro
+    endif
+    exec 'normal! @' . l:macro
+endfunction
+nnoremap <silent> @ :call DoMacroSave()<CR>
+
 if has("tcl")
    tclfile ~/.vim.tcl
 endif
@@ -11,6 +25,7 @@ endif
 
 set ruler " status bar
 set showcmd " show current command sequence in right status bar
+set rulerformat=%60(%F%r\ %{g:LastMacro}\ %l,%L\ %p%%%)
 
 set showmatch " matching parens
 
