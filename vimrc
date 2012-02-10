@@ -25,7 +25,7 @@ endif
 
 set ruler " status bar
 set showcmd " show current command sequence in right status bar
-set rulerformat=%60(%F%r\ %{g:LastMacro}\ %l,%L\ %p%%%)
+set rulerformat=%60(%F%r\ %{g:LastMacro}\ %l.%c,%L\ %p%%%)
 
 set showmatch " matching parens
 
