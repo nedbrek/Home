@@ -37,14 +37,17 @@ setopt prompt_subst
 # aliases
 # better defaults
 builtin alias cp='cp -i'
+builtin alias ln='ln -i'
+builtin alias ls='ls -F'
 builtin alias mv='mv -i'
 builtin alias rm='rm -i'
 builtin alias vi='vim'
-builtin alias ls='ls -F'
 
 # short forms
 builtin alias d='dirs -v'
 builtin alias h='history'
+builtin alias les='/usr/bin/less -x3'
+builtin alias less='les -S'
 
 # complex commands
 lsd() {ls -l | awk '/^d/{print $NF}'}
