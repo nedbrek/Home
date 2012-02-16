@@ -14,6 +14,15 @@ proc isDoNothingLine {l} {
 	return 0
 }
 
+proc earlyOut {b l cur} {
+	if {[isDoNothingLine $cur]} {
+		$b delete $l
+	} else {
+		# move down one
+		::vim::command {normal j}
+	}
+}
+
 proc collapseDiff {} {
 	set b $::vim::current(buffer)
 	set l $::vim::range(begin)
@@ -40,9 +49,7 @@ proc collapseDiff {} {
 		if {[string index $nextLine 0] ne "-"} {
 			# not found, look at prev
 			if {[string index $prevLine 0] ne "-"} {
-				if {[isDoNothingLine $cur]} {
-					$b delete $l
-				}
+				earlyOut $b $l $cur
 				return ;# not found
 			}
 			set oth $prevLine
@@ -53,9 +60,7 @@ proc collapseDiff {} {
 
 		if {[string index $nextLine 0] ne "+"} {
 			if {[string index $prevLine 0] ne "+"} {
-				if {[isDoNothingLine $cur]} {
-					$b delete $l
-				}
+				earlyOut $b $l $cur
 				return
 			}
 			set oth $prevLine
@@ -70,9 +75,7 @@ proc collapseDiff {} {
 
 	# compare
 	if {$curT ne $nxtTxt} {
-		if {[isDoNothingLine $cur]} {
-			$b delete $origL
-		}
+		earlyOut $b $origL $cur
 		return ;# different, leave intact
 	}
 	# else, merge
