@@ -49,6 +49,16 @@ builtin alias h='history'
 builtin alias les='/usr/bin/less -x3'
 builtin alias less='les -S'
 
+builtin alias 1='pushd +1'
+builtin alias 2='pushd +2'
+builtin alias 3='pushd +3'
+builtin alias 4='pushd +4'
+builtin alias 5='pushd +5'
+builtin alias 6='pushd +6'
+builtin alias 7='pushd +7'
+builtin alias 8='pushd +8'
+builtin alias 9='pushd +9'
+
 # complex commands
 lsd() {ls -l | awk '/^d/{print $NF}'}
 
