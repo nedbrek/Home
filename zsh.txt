@@ -1,0 +1,11 @@
+$# - number of arguments
+$<number> - argument number
+$* - all arguments
+
+Examples:
+function fun () {
+	for i
+		do echo $i
+	done
+}
+
