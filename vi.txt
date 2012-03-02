@@ -1,0 +1,200 @@
+a append mode
+A append at end of line
+b back word
+B back true word
+c change prefix
+C change to eol
+d delete prefix
+D delete to eol
+e end of word
+E end of true word
+f forward prefix to char
+F backward prefix to char
+g go prefix (position in line)
+G go to eof
+h left
+H "home" first line in view (compare L)
+i insert mode
+I insert at start
+j down 
+J join next line to current
+k up
+K keyword lookup (spawn man on word under cursor)
+l right
+L "last" last visible line (compare H)
+m set mark prefix (marks are only a-z)
+M middle
+n next search
+N prev search
+o open mode (after)
+O open mode (before)
+p paste after
+P paste before
+q record macro
+Q ex mode (all : commands, use :vi to exit)
+r replace char
+R replace mode
+s substitute char
+S substiture whole line (not to eol, bug)
+t "till" before prefix char (like f, but one to the left)
+T "till" backward after prefix
+u undo
+U undo all changes on line
+v visual char mode
+V visual line mode
+w word
+W true word (whitespace delim)
+x cut/delete current char (exise?)
+X delete previous char
+y yank prefix (y1 is current and next lines)
+Y yank count lines (1 is current)
+z view prefix
+
+~ toggle case
+@ play macro
+# search backward for word under cursor
+$ go to eol
+% go to matching {([
+^ go to bol (no ws)
+* search forward for word under cursor
+- up, to (soft) bol
++ down, to (soft) bol 
+
+0 go to bol (absolute)
+'<azAZ> go to mark
+`` go to previous location
+"<reg> use reg in next command
+/ search forwards
+? search backwards
+. repeat last command
+| go to column (defaults to soft bol, tab counts as multiple columns)
+\ unused
+< unindent
+> indent
+; repeat f/t command
+, invert f/t command
+
+<spacebar> move to next (wraps line)
+
+--- registers
+: ex command (e.g. @: repeat last ex command)
+
+--- control
+a "add" one to number under cursor
+b "back" page up
+d "down" half screen
+e "extend" view downward
+f "forward" page down
+o old edit (goto previous edit)
+r redo
+x "aXe" / decrement number under curser
+y "yank" view back
+[ escape
+
+---windows/viewports
+w<motion> switch to window indicated by motion
+w <ctrl>w cycle all
+wr rotate
+wK move cur window up
+ws split
+wv vertical split
+w= equal size windows
+
+:new - create new viewport
+:resize <val> - make viewport val lines
+:split [filename] - split the viewport into two
+
+:tabnew - new tab
+:help tabpage
+
+--- prefix groups
+[[ most recent { in column 0
+[{ most recent {
+[( most recent (
+[# most recent #if/#else
+[/ start of /**/ style comment
+]# next #else/#endif
+]] next { in column 0
+
+gd goto declaration
+
+zt make current line top
+z- make current line bottom
+
+--- ex commands
+:<range>!<cmd> - process range through cmd
+:!<cmd> - run cmd in a shell
+:'a,!sort - sort from mark a to current
+:grep pattern glob
+:norm <keys> - apply normal mode keystrokes
+
+:a - append
+:b - buffer
+:c - change
+:d - delete
+:e - edit (reload)
+:f - report file status
+:g/<patt>/<ex> - (global) pattern match apply command
+:h <key> - help
+:h object-motions
+:h 29.3 (.4,.5)
+:i - insert
+:m <line> - move
+:n - next file
+:p - prev file
+:q - quit
+:t <line> - copy
+:v/<patt>/<ex> - (invert) pattern mismatch apply command
+:w [filename] - write file
+
+--- other
+statusline
+rulerformat
+   (codes)
+   f file path as given
+   F full file path
+   l current line number
+   L lines in buffer
+   p percentage of file in lines
+   P percentage of file in screen pages
+   r readonly
+   t tail of file name
+
+   default: l,L P
+   desired: %60(%F%r\ %l,%L\ %p%%%)
+
+//---examples
+:10,20g/\Wfor\W/norm A;
+On lines 10-20, if any have "for" as a word, append semi-colon
+
+//---practice area-----------------
+line "1"
+line 2
+line 3
+
+current
+
+int a = 3;
+----
+
+{
+	cheese
+	{
+		tasty
+		{
+		}
+	}
+}
+----
+a = 3;
+efjlefhLef
+
+eleven
+
+
+
+hel
+helfhqwqf
+
+wejlehfl
+
