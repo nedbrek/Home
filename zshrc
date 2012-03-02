@@ -7,8 +7,16 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 autoload -U colors && colors
 
+# make up and down match the whole line
+autoload up-line-or-beginning-search
+zle -N up-line-or-beginning-search
+autoload down-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+
 HISTSIZE=2000
-export EDITOR=vi
+export EDITOR=vim
 
 # source control
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[red]%}("
