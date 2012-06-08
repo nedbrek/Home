@@ -1,3 +1,26 @@
+proc diffCol {s1 s2} {
+	set minLength [string length $s1]
+	set s2length  [string length $s2]
+
+	set sameLength [expr {$minLength == $s2length}]
+
+	if {$s2length < $minLength} {
+		set minLength $s2length
+	}
+
+	for {set i 0} {$i < $minLength} {incr i} {
+		if {[string index $s1 $i] ne [string index $s2 $i]} {
+			return [expr {$i+1}]
+		}
+	}
+
+	if {$sameLength && $i == $minLength} {
+		return 0
+	}
+
+	return [expr {$i+1}]
+}
+
 proc isDoNothingLine {l} {
 	set firstChar [string index $l 0]
 
@@ -14,12 +37,15 @@ proc isDoNothingLine {l} {
 	return 0
 }
 
-proc earlyOut {b l cur} {
+proc earlyOut {b l cur {col 0}} {
 	if {[isDoNothingLine $cur]} {
 		$b delete $l
-	} else {
+	} elseif {$col == 0} {
 		# move down one
 		::vim::command {normal j}
+	} else {
+		# move to column with the difference
+		::vim::command [format {normal 0%d } $col]
 	}
 }
 
@@ -70,12 +96,16 @@ proc collapseDiff {} {
 
 	# retrieve current and other source line (strip lead char)
 	set curTxt [string range $cur 1 end]
-	set curT   [regsub {^[ \t]+} $curTxt ""]
+	set r1 "-1 -1"
+	regexp -indices {^[ \t]+} $curTxt r1
+
+	set curT   [string replace $curTxt [lindex $r1 0] [lindex $r1 1]]
 	set nxtTxt [regsub {^[ \t]+} [string range $oth 1 end] ""]
 
 	# compare
-	if {$curT ne $nxtTxt} {
-		earlyOut $b $origL $cur
+	set col [diffCol $curT $nxtTxt]
+	if {$col != 0} {
+		earlyOut $b $origL $cur [expr {[lindex $r1 1] + 1 + $col}]
 		return ;# different, leave intact
 	}
 	# else, merge
