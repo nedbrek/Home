@@ -15,8 +15,12 @@ zle -N down-line-or-beginning-search
 bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 
-HISTSIZE=2000
+export HISTSIZE=2000
+export SAVEHIST=$HISTSIZE
+export HISTFILE=~/.zhistory
 export EDITOR=vim
+setopt APPEND_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
 
 # source control
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[red]%}("
