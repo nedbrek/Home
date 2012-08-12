@@ -41,8 +41,20 @@ proc earlyOut {b l cur {col 0}} {
 	if {[isDoNothingLine $cur]} {
 		$b delete $l
 	} elseif {$col == 0} {
-		# move down one
-		::vim::command {normal j}
+		# move to next section
+		set firstChar [string index $cur 0]
+		if {$firstChar eq "+"} {
+			set next "-"
+		} elseif {$firstChar eq "-"} {
+			set next "+"
+		} else {
+			# move down one
+			::vim::command {normal j}
+			return
+		}
+
+		set r [subst {^\[ $next\]}]
+		::vim::command "call search('$r', 'W')"
 	} else {
 		# move to column with the difference
 		::vim::command [format {normal 0%d } $col]
