@@ -1,0 +1,16 @@
+if {$tcl_interactive} {
+	proc quit {{returnCode 0}} {
+		exit $returnCode
+	}
+
+	# check for readline
+	if {![catch {package require tclreadline}]} {
+		namespace eval tclreadline {
+			proc prompt1 {} {
+				return "% "
+			}
+		}
+		::tclreadline::Loop
+	}
+}
+
