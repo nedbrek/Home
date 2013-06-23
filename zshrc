@@ -1,6 +1,9 @@
 # command line
 bindkey '^W' vi-backward-kill-word
 bindkey -e
+# default includes . and /
+# we want backwards kill to stop on path chunks
+export WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
 
 # auto-complete lower to upper
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
