@@ -67,18 +67,32 @@ proc collapseDiff {} {
 	# Ned, check end==begin
 	set origL $l
 
-	# check that current line is a diff
+	# get first line
 	set cur [$b get $l]
+	# find the other line, start with next
+	set nextLine [$b get [expr $l+1]]
+	set prevLine [$b get [expr $l-1]]
+
+	# what type of line are we on
 	set firstChar [string index $cur 0]
-	if {$firstChar eq " " || $firstChar eq "@"} {
-		# diff markers (not true diff)
+	if {$firstChar eq " "} {
+		# matching line
 		$b delete $l
 		return
 	}
 
-	# find the other line, start with next
-	set nextLine [$b get [expr $l+1]]
-	set prevLine [$b get [expr $l-1]]
+	set prevFirstChar [string index $prevLine 0]
+	# if diff marker (not true diff)
+	if {$firstChar eq "@"} {
+		# if line above is also diff, delete it instead
+		if {$prevFirstChar eq "@"} {
+			$b delete [expr $l - 1]
+		} else {
+			$b delete $l
+		}
+		return
+	}
+
 	set oth $nextLine
 
 	# is current + or -
