@@ -42,6 +42,11 @@ set smartindent
 " turn it off for pasting
 set pastetoggle=<F2>
 
+" spellcheck
+" in normal mode, F5 will toggle spelling highlight
+:nnoremap <F5> :setlocal spell!<CR>
+
+" tabs
 set tabstop=3
 set shiftwidth=3
 
