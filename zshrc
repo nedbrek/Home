@@ -6,6 +6,8 @@ bindkey -e
 export WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
 
 # auto-complete lower to upper
+autoload -U compinit
+compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 autoload -U colors && colors
