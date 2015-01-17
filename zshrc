@@ -9,6 +9,7 @@ export WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
 autoload -U compinit
 compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' ignored-patterns '*.o'
 
 autoload -U colors && colors
 
