@@ -14,12 +14,14 @@ zstyle ':completion:*' ignored-patterns '*.o'
 autoload -U colors && colors
 
 # make up and down match the whole line
-autoload up-line-or-beginning-search
+autoload -U up-line-or-beginning-search
 zle -N up-line-or-beginning-search
-autoload down-line-or-beginning-search
+autoload -U down-line-or-beginning-search
 zle -N down-line-or-beginning-search
-bindkey '^[[A' up-line-or-beginning-search
-bindkey '^[[B' down-line-or-beginning-search
+#bindkey '^[[A' up-line-or-beginning-search
+bindkey "${key[Up]}" up-line-or-beginning-search
+#bindkey '^[[B' down-line-or-beginning-search
+bindkey "${key[Down]}" down-line-or-beginning-search
 
 export HISTSIZE=2000
 export SAVEHIST=$HISTSIZE
