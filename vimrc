@@ -38,6 +38,9 @@ syntax enable " highlighting
 :command W w
 :command Wq wq
 
+" make Y behave like D and C
+nnoremap Y y$
+
 " indentation
 set autoindent
 set smartindent
