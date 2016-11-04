@@ -41,6 +41,10 @@ syntax enable " highlighting
 " make Y behave like D and C
 nnoremap Y y$
 
+" make search show context
+nnoremap n nzz
+nnoremap N Nzz
+
 " indentation
 set autoindent
 set smartindent
