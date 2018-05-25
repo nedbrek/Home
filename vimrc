@@ -23,6 +23,9 @@ endif
 " run make inside vi
 :command -nargs=* Make make <args> | cwindow 3
 
+" find in files
+:command Find :lex system("git grep -n " . shellescape(getreg('/')))
+
 set ruler " status bar
 set showcmd " show current command sequence in right status bar
 set rulerformat=%60(%F%r\ %{g:LastMacro}\ %l.%c,%L\ %p%%%)
