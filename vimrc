@@ -28,7 +28,7 @@ endif
 
 set ruler " status bar
 set showcmd " show current command sequence in right status bar
-set rulerformat=%60(%F%r\ %{g:LastMacro}\ %l.%c,%L\ %p%%%)
+set rulerformat=%60(%F%r\ %{g:LastMacro}\ %l.%v,%L\ %p%%%)
 
 " some installations require command height of 2 (not sure why)
 "set cmdheight=2 " for output of scripts (no press enter)
