@@ -82,3 +82,5 @@ builtin alias 9='pushd +9'
 # complex commands
 lsd() {ls -l | awk '/^d/{print $NF}'}
 
+#dirs <working directories>
+
