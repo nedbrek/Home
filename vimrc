@@ -34,6 +34,7 @@ set rulerformat=%60(%F%r\ %{g:LastMacro}\ %l.%v,%L\ %p%%%)
 "set cmdheight=2 " for output of scripts (no press enter)
 
 set showmatch " matching parens
+set history=200
 
 syntax enable " highlighting
 
