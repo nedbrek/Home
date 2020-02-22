@@ -52,6 +52,8 @@ nnoremap N Nzz
 " indentation
 set autoindent
 set smartindent
+set copyindent
+set preserveindent
 
 " turn it off for pasting
 set pastetoggle=<F2>
@@ -61,6 +63,8 @@ set pastetoggle=<F2>
 :nnoremap <F5> :setlocal spell!<CR>
 
 " tabs
+"set exrc " allow per project overrides
+set noexpandtab
 set tabstop=3
 set shiftwidth=3
 
