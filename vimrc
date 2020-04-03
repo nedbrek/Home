@@ -68,6 +68,9 @@ set noexpandtab
 set tabstop=3
 set shiftwidth=3
 
+" don't resize all windows when one close
+set noequalalways
+
 " search
 set nohlsearch " no highlight
 set incsearch " incremental
