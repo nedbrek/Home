@@ -1,0 +1,12 @@
+# horizontal split (instead of vertical)
+vimdiff -o <file1> <file2>
+
+# move a window to a precise x,y coord
+xdotool selectwindow windowmove <x> <y>
+
+# generate ctags for C++
+ctags --c++-kinds=+p --fields=+iaS --extra=+q -R
+
+# fix xterm title
+echo -ne "\033]0;Terminal | `hostname`\007"
+
