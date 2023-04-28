@@ -9,6 +9,9 @@ function! DoMacroSave()
     if l:macro =~ '^\d\+$'
         let l:macro = nr2char(l:macro)
     endif
+    if l:macro == '\n'
+        return
+    endif
     if l:macro != '@'
         let g:LastMacro = '@' .l:macro
     endif
