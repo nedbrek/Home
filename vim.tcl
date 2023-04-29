@@ -108,7 +108,12 @@ proc collapseDiff {} {
 			incr l -1
 		}
 	} else {
-		if {$firstChar ne "-"} { return } ;# something horribly wrong
+		if {$firstChar ne "-"} {
+			# not sure what this is
+			# move down one
+			::vim::command {normal j}
+			return
+		}
 
 		if {[string index $nextLine 0] ne "+"} {
 			if {[string index $prevLine 0] ne "+"} {
