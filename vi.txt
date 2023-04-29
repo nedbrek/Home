@@ -130,6 +130,7 @@ z- make current line bottom
 
 :a - append
 :b - buffer
+:bufdo normal <cmd> - do cmd in all buffers
 :c - change
 :d - delete
 :e - edit (reload)
@@ -146,6 +147,7 @@ z- make current line bottom
 :t <line> - copy
 :v/<patt>/<ex> - (invert) pattern mismatch apply command
 :w [filename] - write file
+:windo <cmd> - do cmd in all windows
 
 --- other
 statusline
