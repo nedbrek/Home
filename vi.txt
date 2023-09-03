@@ -78,6 +78,8 @@ $ go to eol
 
 --- registers
 : ex command (e.g. @: repeat last ex command)
++ cut-buffer (Control C/V)
+* primary clipboard (X11 selection)
 
 --- control
 a "add" one to number under cursor
@@ -87,9 +89,11 @@ e "extend" view downward
 f "forward" page down
 o old edit (goto previous edit)
 r redo
+t help go back
 x "aXe" / decrement number under curser
 y "yank" view back
 [ escape
+] help hyperlink
 
 ---windows/viewports
 w<motion> switch to window indicated by motion
