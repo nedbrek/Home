@@ -10,3 +10,5 @@ ctags --c++-kinds=+p --fields=+iaS --extra=+q -R
 # fix xterm title
 echo -ne "\033]0;Terminal | `hostname`\007"
 
+ffmpeg -y -f alsa -i default -f x11grab -framerate 30 -video_size 1600x900 -i :0.0+0,0 -c:v libx264 -pix_fmt yuv420p -qp 0 -preset ultrafast ned.avi
+
