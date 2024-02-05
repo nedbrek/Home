@@ -37,8 +37,20 @@ function! VimCollapseDiff()
 		return
 	endif
 
+	if l:cur_line[0] != '-' && l:cur_line[0] != '+'
+		return
+	endif
+
 	" pull next line
 	let l:nxt_line = getline(line('.') + 1)
+
+	" make sure lines alternate + and -
+	if l:cur_line[0] == '-' && l:nxt_line[0] != '+'
+		return
+	endif
+	if l:cur_line[0] == '+' && l:nxt_line[0] != '-'
+		return
+	endif
 
 	" find first difference
 	let l:col_diff = DiffColDiff(l:cur_line, l:nxt_line)
