@@ -37,12 +37,18 @@ function! VimCollapseDiff()
 		return
 	endif
 
-	if l:cur_line[0] != '-' && l:cur_line[0] != '+'
+	" pull next line
+	let l:nxt_line = getline(line('.') + 1)
+
+	" if two @ markers in a row, delete the upper one
+	if l:cur_line[0] == '@' && l:nxt_line[0] != '@'
+		execute "normal! dd"
 		return
 	endif
 
-	" pull next line
-	let l:nxt_line = getline(line('.') + 1)
+	if l:cur_line[0] != '-' && l:cur_line[0] != '+'
+		return
+	endif
 
 	" make sure lines alternate + and -
 	if l:cur_line[0] == '-' && l:nxt_line[0] != '+'
