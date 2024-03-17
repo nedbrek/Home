@@ -41,7 +41,7 @@ function! VimCollapseDiff()
 	let l:nxt_line = getline(line('.') + 1)
 
 	" if two @ markers in a row, delete the upper one
-	if l:cur_line[0] == '@' && l:nxt_line[0] != '@'
+	if l:cur_line[0] == '@' && l:nxt_line[0] == '@'
 		execute "normal! dd"
 		return
 	endif
