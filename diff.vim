@@ -17,6 +17,21 @@ function! DiffColDiff(line1, line2)
 		let l:common_len += 1
 	endfor
 
+	" check for one line shorter
+	if strlen(a:line1) > strlen(a:line2)
+		if l:common_len < strlen(a:line2)
+			return l:common_len + 1
+		endif
+		return strlen(a:line2)
+	endif
+
+	 if strlen(a:line1) < strlen(a:line2)
+		if l:common_len < strlen(a:line1)
+			return l:common_len + 1
+		endif
+		return strlen(a:line1)
+	endif
+
 	" compared all chars
 	if l:common_len == strlen(a:line2)-1
 		return 0
