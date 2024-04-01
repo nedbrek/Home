@@ -25,7 +25,7 @@ function! DiffColDiff(line1, line2)
 		return strlen(a:line2)
 	endif
 
-	 if strlen(a:line1) < strlen(a:line2)
+	if strlen(a:line1) < strlen(a:line2)
 		if l:common_len < strlen(a:line1)
 			return l:common_len + 1
 		endif
@@ -54,10 +54,18 @@ function! VimCollapseDiff()
 
 	" pull next line
 	let l:nxt_line = getline(line('.') + 1)
+	" pull prev line
+	let l:prv_line = getline(line('.') - 1)
 
 	" if two @ markers in a row, delete the upper one
 	if l:cur_line[0] == '@' && l:nxt_line[0] == '@'
 		execute "normal! dd"
+		return
+	endif
+
+	" if on the lower of two @ markers, move up
+	if l:cur_line[0] == '@' && l:prv_line[0] == '@'
+		execute "normal! k"
 		return
 	endif
 
