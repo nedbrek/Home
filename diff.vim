@@ -73,6 +73,13 @@ function! VimCollapseDiff()
 		return
 	endif
 
+	" if previous line is empty, and current and next line have the same prefix
+	if strlen(l:prv_line) == 0 && strlen(l:nxt_line) > 0 && l:nxt_line[0] == l:cur_line[0]
+		" pull two lines up from next region
+		execute "normal! }j2ddj{{jpk"
+		return
+	endif
+
 	" make sure lines alternate + and -
 	if l:cur_line[0] == '-' && l:nxt_line[0] != '+'
 		return
